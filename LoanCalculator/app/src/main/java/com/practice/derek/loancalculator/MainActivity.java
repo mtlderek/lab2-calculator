@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 //import com.google.android.gms.appindexing.Action;
 //import com.google.android.gms.appindexing.AppIndex;
 //import com.google.android.gms.appindexing.Thing;
@@ -16,7 +18,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     EditText loanAmount, term, interest;
-    TextView monthPayment, totalPayment, totalInterest;
+    TextView monthPayment, totalPayment, totalInterest, resultSection;
     LoanCalculator loanCalculator;
     private static final String TAG = "MainActivity";
 
@@ -32,33 +34,39 @@ public class MainActivity extends AppCompatActivity {
         monthPayment = (TextView) findViewById(R.id.monthly_payment_result);
         totalPayment = (TextView) findViewById(R.id.total_payment_result);
         totalInterest = (TextView) findViewById(R.id.total_interest_result);
+        resultSection = (TextView) findViewById(R.id.results);
 
 
     }
 
     public void calculateLoanInfo(View view){
+        try {
+            double loanAmountDouble = Double.parseDouble(loanAmount.getText().toString());
+            int termDouble = Integer.parseInt(term.getText().toString());
+            double interestDouble = Double.parseDouble(interest.getText().toString());
+            loanCalculator = new LoanCalculator(loanAmountDouble, termDouble, interestDouble);
 
-        double loanAmountDouble = Double.parseDouble(loanAmount.getText().toString());
-        int termDouble = Integer.parseInt(term.getText().toString());
-        double interestDouble = Double.parseDouble(interest.getText().toString());
-        loanCalculator = new LoanCalculator(loanAmountDouble, termDouble, interestDouble);
+            DecimalFormat currency = new DecimalFormat("#,###,##0.00");
 
+            monthPayment.setText("" + currency.format(loanCalculator.getMonthlyPayment()));
+            totalPayment.setText("" + currency.format(loanCalculator.getTotalCostOfLoan()));
+            totalInterest.setText("" + currency.format(loanCalculator.getTotalInterest()));
+        } catch(Exception e){
+            Log.i(TAG, "calculateLoanInfo: User field(s) not filled in");
+            resultSection.setText(R.string.user_warning);
 
-
-        monthPayment.setText("" + loanCalculator.getMonthlyPayment());
-        totalPayment.setText("" + loanCalculator.getTotalCostOfLoan());
-        totalInterest.setText("" + loanCalculator.getTotalInterest());
+        }
 
     }
 
     public void clearFields(View view){
-        monthPayment.setText("");
-        totalPayment.setText("");
-        totalInterest.setText("");
+        monthPayment.setText(null);
+        totalPayment.setText(null);
+        totalInterest.setText(null);
 
-        loanAmount.setText("");
-        term.setText("");
-        interest.setText("");
+        loanAmount.setText(null);
+        term.setText(null);
+        interest.setText(null);
     }
 
 

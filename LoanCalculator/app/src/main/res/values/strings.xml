@@ -12,5 +12,6 @@
     <string name="monthly_payment">Monthly Payment</string>
     <string name="total_payment">Total Payment</string>
     <string name="total_interest">Total Interest</string>
+    <string name="user_warning">Be sure to fill in all fields!</string>
 
 </resources>

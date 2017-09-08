@@ -37,7 +37,7 @@
         <EditText
             android:layout_width="134dp"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:ems="10"
             android:id="@+id/loan_amount"
             android:hint="@string/loan_amount_hint" />
@@ -80,7 +80,7 @@
         <EditText
             android:layout_width="133dp"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:ems="10"
             android:id="@+id/yearly_int_rate"
             android:layout_weight="0.01"
@@ -108,14 +108,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/clearBtn"
             android:layout_weight="0.39"
-            android:onClick="clearFields (MainActivity)" />
+            android:onClick="clearFields" />
     </LinearLayout>
 
     <TextView
         android:text="@string/results"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView15"
+        android:id="@+id/results"
         android:layout_weight="0.05"
         android:textAlignment="center" />
 
