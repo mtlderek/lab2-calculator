@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         totalPayment = (TextView) findViewById(R.id.total_payment_result);
         totalInterest = (TextView) findViewById(R.id.total_interest_result);
 
+
     }
 
     public void calculateLoanInfo(View view){
@@ -51,7 +52,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clearFields(View view){
-        // TODO: 9/7/2017 clearFields Method
+        monthPayment.setText("");
+        totalPayment.setText("");
+        totalInterest.setText("");
+
+        loanAmount.setText("");
+        term.setText("");
+        interest.setText("");
     }
 
 
